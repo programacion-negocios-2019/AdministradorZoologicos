@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_11___Administrador_de_Zoologico"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <Label Content="Listado de zoológicos" Grid.Column="0" Grid.Row="0"/>
+        <Label Content="Listado de animales en zoológico" Grid.Column="1" Grid.Row="0"/>
+        <Label Content="Listado de animales" Grid.Column="2" Grid.Row="0"/>
+        <ListBox Name="lbZoologicos" Grid.Column="0" Grid.Row="1" Margin="5"/>
+        <ListBox Name="lbAnimalesZoologico" Grid.Column="1" Grid.Row="1" Margin="5"/>
+        <ListBox Name="lbAnimales" Grid.Column="2" Grid.Row="1" Margin="5"/>
     </Grid>
 </Window>

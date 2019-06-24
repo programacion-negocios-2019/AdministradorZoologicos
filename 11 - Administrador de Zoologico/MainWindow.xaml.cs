@@ -62,7 +62,7 @@ namespace _11___Administrador_de_Zoologico
                     lbZoologicos.DisplayMemberPath = "ciudad";
                     // ¿Qué valor debe ser entregado cuando un elemento de nuestro ListBox es seleccionado?
                     lbZoologicos.SelectedValuePath = "id";
-                    // ¿Quién es la referencia de los datos para el ListBox (popular?
+                    // ¿Quién es la referencia de los datos para el ListBox (popular)
                     lbZoologicos.ItemsSource = tablaZoologico.DefaultView;
                 }
             }
@@ -70,6 +70,52 @@ namespace _11___Administrador_de_Zoologico
             {
                 MessageBox.Show(e.ToString());
             }
+        }
+
+        private void MostrarAnimalesZoologico()
+        {
+            try
+            {
+                // El query ha realizar en la BD
+                string query = @"SELECT * FROM Zoo.Animal a INNER JOIN Zoo.AnimalZoologico b
+                                ON a.id = b.idAnimal WHERE b.idZoologico = @zooId";
+
+                // Comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlconnection);
+
+                // SqlDataAdapter es una interfaz entre las tablas y los objetos utilizables en C#
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+
+                using(sqlDataAdapter)
+                {
+                    // Reemplazar el valor del parámetro del query con su valor correspondiente
+                    sqlCommand.Parameters.AddWithValue("@zooId", lbZoologicos.SelectedValue);
+
+                    // Objecto en C# que refleja una tabla de una BD
+                    DataTable tablaAnimalZoologico = new DataTable();
+
+                    // Llenar el objeto de tipo DataTable
+                    sqlDataAdapter.Fill(tablaAnimalZoologico);
+
+                    // ¿Cuál información de la tabla en el DataTable debería se desplegada en nuestro ListBox?
+                    lbAnimalesZoologico.DisplayMemberPath = "nombre";
+                    // ¿Qué valor debe ser entregado cuando un elemento de nuestro ListBox es seleccionado?
+                    lbAnimalesZoologico.SelectedValuePath = "id";
+                    // ¿Quién es la referencia de los datos para el ListBox (popular)
+                    lbAnimalesZoologico.ItemsSource = tablaAnimalZoologico.DefaultView;
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
+
+        private void LbZoologicos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Llenar el ListBox de Animales en Zoológico
+            MostrarAnimalesZoologico();
         }
     }
 }

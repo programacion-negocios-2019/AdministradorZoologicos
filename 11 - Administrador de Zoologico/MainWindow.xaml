@@ -20,7 +20,7 @@
         <Label Content="Listado de zoológicos" Grid.Column="0" Grid.Row="0"/>
         <Label Content="Listado de animales en zoológico" Grid.Column="1" Grid.Row="0"/>
         <Label Content="Listado de animales" Grid.Column="2" Grid.Row="0"/>
-        <ListBox Name="lbZoologicos" Grid.Column="0" Grid.Row="1" Margin="5"/>
+        <ListBox Name="lbZoologicos" Grid.Column="0" Grid.Row="1" Margin="5" SelectionChanged="LbZoologicos_SelectionChanged"/>
         <ListBox Name="lbAnimalesZoologico" Grid.Column="1" Grid.Row="1" Margin="5"/>
         <ListBox Name="lbAnimales" Grid.Column="2" Grid.Row="1" Margin="5"/>
     </Grid>

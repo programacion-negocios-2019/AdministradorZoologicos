@@ -190,7 +190,8 @@ namespace _11___Administrador_de_Zoologico
                 sqlCommand.Parameters.AddWithValue("@ciudad", txtInformacion.Text);
 
                 // Ejecutamos el query de inserción
-                sqlCommand.ExecuteScalar();
+                // https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.executescalar
+                sqlCommand.ExecuteNonQuery();
 
                 // Limpiar el valor del texto en txtInformacion
                 txtInformacion.Text = String.Empty;
@@ -204,6 +205,134 @@ namespace _11___Administrador_de_Zoologico
                 sqlconnection.Close();
                 // Actualizar el ListBox de Zoológicos
                 MostrarZoologicos();
+            }
+        }
+
+        public void BtnAgregarAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtInformacion.Text == string.Empty)
+            {
+                MessageBox.Show("Debe ingresar un nombre para el animal en la caja de texto.");
+                txtInformacion.Focus();
+            }
+            else
+            {
+                try
+                {
+                    string query = "INSERT INTO Zoo.Animal(nombre) VALUES(@nombre)";
+
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlconnection);
+
+                    sqlconnection.Open();
+
+                    sqlCommand.Parameters.AddWithValue("@nombre", txtInformacion.Text);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    sqlconnection.Close();
+                    MostrarAnimales();
+                }
+            }
+        }
+
+        public void BtnActualizarAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtInformacion.Text == string.Empty)
+            {
+                MessageBox.Show("Debes ingresar el nuevo nombre del animal en la caja de texto.");
+                txtInformacion.Focus();
+            }
+            else
+            {
+                try
+                {
+                    string query = "UPDATE Zoo.Animal SET nombre = @nombre WHERE id = @idAnimal";
+
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlconnection);
+
+                    sqlconnection.Open();
+
+                    sqlCommand.Parameters.AddWithValue("@nombre", txtInformacion.Text);
+                    sqlCommand.Parameters.AddWithValue("@idAnimal", lbAnimales.SelectedValue);
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    sqlconnection.Close();
+                    MostrarAnimales();
+                }
+            }
+        }
+
+        public void RemoverAnimalZoologico_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbZoologicos.SelectedItem == null && lbAnimalesZoologico.SelectedItem == null)
+                MessageBox.Show("Debes seleccionar el zoológico y el animal que deseas remover.");
+            else
+            {
+                try
+                {
+                    string query = "DELETE FROM Zoo.AnimalZoologico WHERE idZoologico = @idZoologico AND idAnimal = @idAnimal";
+
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlconnection);
+
+                    sqlconnection.Open();
+
+                    sqlCommand.Parameters.AddWithValue("@idZoologico", lbZoologicos.SelectedValue);
+                    sqlCommand.Parameters.AddWithValue("@idAnimal", lbAnimalesZoologico.SelectedValue);
+
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    sqlconnection.Close();
+                    MostrarAnimalesZoologico();
+                }
+            }
+        }
+
+        public void AgregarAnimalZoologico_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbZoologicos.SelectedItem == null && lbAnimales.SelectedItem == null)
+                MessageBox.Show("Debes seleccionar el zoológico y seleccionar el animal a agregar.");
+            else
+            {
+                try
+                {
+                    string query = @"INSERT INTO Zoo.AnimalZoologico (idZoologico, idAnimal) 
+                                     VALUES (@idZoologico,  @idAnimal)";
+
+                    SqlCommand sqlCommand = new SqlCommand(query, sqlconnection);
+
+                    sqlconnection.Open();
+
+                    sqlCommand.Parameters.AddWithValue("@idZoologico", lbZoologicos.SelectedValue);
+                    sqlCommand.Parameters.AddWithValue("@idAnimal", lbAnimales.SelectedValue);
+
+                    sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+                finally
+                {
+                    sqlconnection.Close();
+                    MostrarAnimalesZoologico();
+                }
             }
         }
     }

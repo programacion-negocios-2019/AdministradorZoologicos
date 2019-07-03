@@ -27,10 +27,15 @@
         <ListBox Name="lbAnimales" Grid.Column="2" Grid.Row="1" Margin="5"/>
         <Button Name="btnEliminarZoologico" Content="Eliminar zoológico" Grid.Column="0" Grid.Row="2" Click="BtnEliminarZoologico_Click"/>
         <Button Name="btnAgregarZoologico" Content="Agregar zoológico" Grid.Column="0" Grid.Row="4" Click="BtnAgregarZoologico_Click"/>
-        <Button Name="btnRemoverAnimalZoo" Content="Remover animal del zoológico" Grid.Column="1" Grid.Row="2"/>
-        <Button Name="btnAgregarAnimalZoo" Content="Añadir animal al zoológico" Grid.Column="1" Grid.Row="4"/>
+        <Button Name="btnRemoverAnimalZoo" Content="Remover animal del zoológico" Grid.Column="1" Grid.Row="2" Click="RemoverAnimalZoologico_Click"/>
+        <Button Name="btnAgregarAnimalZoo" Content="Añadir animal al zoológico" Grid.Column="1" Grid.Row="4" Click="AgregarAnimalZoologico_Click"/>
         <Button Name="btnEliminarAnimal" Content="Eliminar animal" Grid.Column="2" Grid.Row="2"/>
-        <Button Name="btnActualizarAnimal" Content="Actualizar nombre animal" Grid.Column="2" Grid.Row="4"/>
-        <TextBox Name="txtInformacion" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3"/>
+        <Button Name="btnAgregarAnimal" Content="Agregar Animal" Grid.Column="2" Grid.Row="4" Click="BtnAgregarAnimal_Click"/>
+        <Button Name="btnActualizarAnimal" Content="Actualizar nombre animal" Grid.Column="2" Grid.Row="3" Click="BtnActualizarAnimal_Click"/>
+        <TextBox Name="txtInformacion" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" FontSize="18"/>
     </Grid>
+    <!-- Material Design (Google) -->
+    <!-- Human Interface Guidelines -->
+    <!-- Fluent Design -->
+    <!-- Metro Design Language -->
 </Window>
